@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace get_build_log
+namespace ShowCommitsForBuild
 {
     public class GitLabUrlLauncher
     {

@@ -7,8 +7,8 @@
     <ProjectGuid>{65058C0E-8FE8-4A49-AFF6-C5EB78CF4398}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>get_build_log</RootNamespace>
-    <AssemblyName>get-build-log</AssemblyName>
+    <RootNamespace>ShowCommitsForBuild</RootNamespace>
+    <AssemblyName>show-commits-for-build</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -70,7 +70,9 @@
     <Compile Include="UnDuckableErrorPrintExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

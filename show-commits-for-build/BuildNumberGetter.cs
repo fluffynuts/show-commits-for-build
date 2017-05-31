@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace get_build_log
+namespace ShowCommitsForBuild
 {
     public class BuildNumberGetter
     {
@@ -16,7 +16,7 @@ namespace get_build_log
             var selected = GrokBuildNumberFrom(_args);
             while (selected == 0)
             {
-                selected = GetNumberFrom(GetBuildNumberFromUser());
+                selected = GrokBuildNumberFrom(GetBuildNumberFromUser());
             }
             return selected;
         }
@@ -28,7 +28,7 @@ namespace get_build_log
             return Console.ReadLine()?.Trim() ?? "";
         }
 
-        private static int GrokBuildNumberFrom(string[] args)
+        private static int GrokBuildNumberFrom(params string[] args)
         {
             if (args.Length == 0)
                 return 0;

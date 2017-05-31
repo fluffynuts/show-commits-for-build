@@ -9,7 +9,7 @@ using PeanutButter.DuckTyping.Exceptions;
 using PeanutButter.DuckTyping.Extensions;
 using PeanutButter.Utils;
 
-namespace get_build_log
+namespace ShowCommitsForBuild
 {
     public class BuildInfoFinder
     {

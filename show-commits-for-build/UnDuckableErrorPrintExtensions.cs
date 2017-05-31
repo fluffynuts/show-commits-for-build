@@ -2,7 +2,7 @@ using System;
 using PeanutButter.DuckTyping.Exceptions;
 using PeanutButter.Utils;
 
-namespace get_build_log
+namespace ShowCommitsForBuild
 {
     public static class UnDuckableErrorPrintExtensions
     {
