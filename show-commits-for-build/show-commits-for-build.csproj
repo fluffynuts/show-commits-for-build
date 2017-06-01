@@ -57,17 +57,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BuildInfoFinder.cs" />
-    <Compile Include="BuildNumberGetter.cs" />
-    <Compile Include="GitLabUrlLauncher.cs" />
-    <Compile Include="IBuildInfo.cs" />
-    <Compile Include="IGitLabConfig.cs" />
-    <Compile Include="IIntermediateBuildQueryResponse.cs" />
-    <Compile Include="ITfsConfig.cs" />
-    <Compile Include="JObjectExtensions.cs" />
+    <Compile Include="BuildInfo\BuildInfoFinder.cs" />
+    <Compile Include="Config\ConfigFinder.cs" />
+    <Compile Include="UserInterface\FailureFeedback.cs" />
+    <Compile Include="Gitlab\IGitLabUrlLauncher.cs" />
+    <Compile Include="Config\IConfigFinder.cs" />
+    <Compile Include="UserInterface\IFailureFeedback.cs" />
+    <Compile Include="UserInterface\BuildNumberGetter.cs" />
+    <Compile Include="UserInterface\ConsoleAbstraction.cs" />
+    <Compile Include="Gitlab\GitLabUrlLauncher.cs" />
+    <Compile Include="BuildInfo\IBuildInfo.cs" />
+    <Compile Include="UserInterface\IConsole.cs" />
+    <Compile Include="Config\IGitLabConfig.cs" />
+    <Compile Include="BuildInfo\IIntermediateBuildQueryResponse.cs" />
+    <Compile Include="BuildInfo\ISecureWebRequestFactory.cs" />
+    <Compile Include="Coordinator\IShowCommitsForBuildCoordinator.cs" />
+    <Compile Include="Config\ITfsConfig.cs" />
+    <Compile Include="Extensions\JObjectExtensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnDuckableErrorPrintExtensions.cs" />
+    <Compile Include="BuildInfo\SecureWebRequestFactory.cs" />
+    <Compile Include="Coordinator\ShowCommitsForBuildCoordinator.cs" />
+    <Compile Include="Extensions\UnDuckableErrorPrintExtensions.cs" />
+    <Compile Include="BuildInfo\WebResponseReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

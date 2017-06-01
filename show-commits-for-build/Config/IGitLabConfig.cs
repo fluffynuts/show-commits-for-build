@@ -1,4 +1,4 @@
-namespace ShowCommitsForBuild
+namespace ShowCommitsForBuild.Config
 {
     public interface IGitLabConfig
     {

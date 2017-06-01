@@ -1,93 +1,48 @@
 ﻿using System;
-using System.Configuration;
-using PeanutButter.DuckTyping.Exceptions;
-using PeanutButter.DuckTyping.Extensions;
-using PeanutButter.Utils;
+using System.Net;
+using ShowCommitsForBuild.Coordinator;
+using ShowCommitsForBuild.UserInterface;
 
 namespace ShowCommitsForBuild
 {
-    class Program
+    // ReSharper disable once ClassNeverInstantiated.Global
+    public class Program
     {
+        private enum ProgramReturnValues
+        {
+            Success = 0,
+            NoBuild = 1,
+            WebException = 13,
+            GeneralException = 14
+        }
+
+
         static int Main(string[] args)
         {
+            var console = new ConsoleAbstraction();
+            var logic = ShowCommitsForBuildCoordinator.Create(console);
+            var buildNumberGetter = new BuildNumberGetter(console, args);
+            var failureFeedback = new FailureFeedback(console);
+
             try
             {
-                var buildNumber = new BuildNumberGetter(args).GetBuildNumberFromArgsOrUserInput();
-
-                var tfsConfig = GetConfig<ITfsConfig>("TFS");
-                var gitlabConfig = GetConfig<IGitLabConfig>("GitLab");
-
-                var infoFinder = new BuildInfoFinder(tfsConfig);
-                var buildInfo = infoFinder.GetInfoForBuildRevision(buildNumber);
-                if (buildInfo == null)
-                {
-                    Console.WriteLine($"No build info found for #{buildNumber}");
-                    Pause();
-                    return 1;
-                }
-
-                var launcher = new GitLabUrlLauncher(gitlabConfig);
-                launcher.ShowCommits(buildInfo.SourceVersion);
-
-                return 0;
+                var buildNumber = buildNumberGetter.GetBuildNumberFromArgsOrUserInput();
+                return logic.ShowCommitsForBuild(buildNumber)
+                    ? (int) ProgramReturnValues.Success
+                    : (int) ProgramReturnValues.NoBuild;
+            }
+            catch (WebException ex)
+            {
+                failureFeedback.PrintFatalWebFailure(ex);
+                console.Pause();
+                return (int) ProgramReturnValues.WebException;
             }
             catch (Exception ex)
             {
-                PrintFatalFailure(ex);
-                Pause();
-                return 13;
+                failureFeedback.PrintFatalFailure(ex);
+                console.Pause();
+                return (int) ProgramReturnValues.GeneralException;
             }
         }
-
-        private static void PrintFatalFailure(Exception ex)
-        {
-            new[]
-            {
-                "Ruh-roh! Something went wrong! Please report this issue to someone you thing can fix it (:",
-                "(more info follows)",
-                "What went wrong:",
-                "----------------",
-                ex.Message,
-                "Where it went wrong:",
-                "--------------------",
-                ex.StackTrace,
-                "--------------------"
-            }.ForEach(s => Console.WriteLine(s));
-        }
-
-        private static void Pause()
-        {
-            Console.WriteLine(" ( Press any key to continue )");
-            Console.ReadKey();
-        }
-
-
-        private static T GetConfig<T>(
-            string context
-        ) where T : class
-        {
-            try
-            {
-                return ConfigurationManager.AppSettings.FuzzyDuckAs<T>(
-                    s => $"{context}.{s}",
-                    s => s.RegexReplace($"^{context}\\.", ""),
-                    true
-                );
-            }
-            catch (UnDuckableException e)
-            {
-                PrintDuckErrors(context, e);
-                return null;
-            }
-        }
-
-        private static void PrintDuckErrors(
-            string context,
-            UnDuckableException unDuckableException
-        )
-        {
-            unDuckableException.Print($"{context} improperly configured:\n* ");
-        }
-
     }
 }

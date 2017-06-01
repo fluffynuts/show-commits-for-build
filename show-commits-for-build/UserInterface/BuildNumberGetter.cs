@@ -1,14 +1,20 @@
-using System;
 using System.Linq;
 
-namespace ShowCommitsForBuild
+namespace ShowCommitsForBuild.UserInterface
 {
-    public class BuildNumberGetter
+    public interface IBuildNumberGetter
     {
+        int GetBuildNumberFromArgsOrUserInput();
+    }
+
+    public class BuildNumberGetter : IBuildNumberGetter
+    {
+        private readonly IConsole _console;
         private readonly string[] _args;
 
-        public BuildNumberGetter(string[] programArgs)
+        public BuildNumberGetter(IConsole console, string[] programArgs)
         {
+            _console = console;
             _args = programArgs;
         }
         public int GetBuildNumberFromArgsOrUserInput()
@@ -21,11 +27,9 @@ namespace ShowCommitsForBuild
             return selected;
         }
 
-        private static string GetBuildNumberFromUser()
+        private string GetBuildNumberFromUser()
         {
-            Console.Write("Please enter a build number: ");
-            Console.Out.Flush();
-            return Console.ReadLine()?.Trim() ?? "";
+            return _console.Prompt("Please enter a build number:");
         }
 
         private static int GrokBuildNumberFrom(params string[] args)

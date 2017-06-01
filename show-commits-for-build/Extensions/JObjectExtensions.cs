@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 
-namespace ShowCommitsForBuild
+namespace ShowCommitsForBuild.Extensions
 {
     public static class JObjectExtensions
     {

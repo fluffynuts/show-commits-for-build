@@ -1,4 +1,4 @@
-namespace ShowCommitsForBuild
+namespace ShowCommitsForBuild.BuildInfo
 {
     public interface IBuildInfo
     {

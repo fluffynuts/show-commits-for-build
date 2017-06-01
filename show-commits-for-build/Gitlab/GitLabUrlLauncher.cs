@@ -1,8 +1,9 @@
 using System.Diagnostics;
+using ShowCommitsForBuild.Config;
 
-namespace ShowCommitsForBuild
+namespace ShowCommitsForBuild.Gitlab
 {
-    public class GitLabUrlLauncher
+    public class GitLabUrlLauncher : IGitLabUrlLauncher
     {
         private readonly IGitLabConfig _config;
 
