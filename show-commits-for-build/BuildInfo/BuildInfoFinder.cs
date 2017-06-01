@@ -7,6 +7,7 @@ using PeanutButter.DuckTyping.Extensions;
 using ShowCommitsForBuild.Config;
 using ShowCommitsForBuild.Extensions;
 using ShowCommitsForBuild.UserInterface;
+using PeanutButter.JObjectExtensions;
 
 namespace ShowCommitsForBuild.BuildInfo
 {

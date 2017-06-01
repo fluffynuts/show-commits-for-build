@@ -41,6 +41,10 @@
       <HintPath>..\packages\PeanutButter.DuckTyping.1.2.148\lib\net45\PeanutButter.DuckTyping.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PeanutButter.JObjectExtensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PeanutButter.JObjectExtensions.1.2.149\lib\net45\PeanutButter.JObjectExtensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PeanutButter.Utils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\PeanutButter.Utils.1.2.148\lib\net45\PeanutButter.Utils.dll</HintPath>
       <Private>True</Private>
@@ -73,7 +77,6 @@
     <Compile Include="BuildInfo\ISecureWebRequestFactory.cs" />
     <Compile Include="Coordinator\IShowCommitsForBuildCoordinator.cs" />
     <Compile Include="Config\ITfsConfig.cs" />
-    <Compile Include="Extensions\JObjectExtensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BuildInfo\SecureWebRequestFactory.cs" />

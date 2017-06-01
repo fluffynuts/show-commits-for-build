@@ -13,6 +13,7 @@ namespace ShowCommitsForBuild.BuildInfo
         {
             _console = console;
         }
+
         public HttpWebRequest CreateFor(string url)
         {
             var request = WebRequest.CreateHttp(url);

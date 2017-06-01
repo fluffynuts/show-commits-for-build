@@ -23,20 +23,23 @@ namespace ShowCommitsForBuild.UserInterface
             return ReadPassword('*');
         }
 
-        public ConsoleKeyInfo ReadKey()
-        {
-            return Console.ReadKey();
-        }
-
         public void Pause()
         {
             WriteLine(" ( Press any key to continue )");
-            ReadKey();
+            InterceptReadKey();
         }
 
-        private readonly int _enter = 13;
-        private readonly int _backspace = 8;
-        private readonly int _ctrlBackspace = 127;
+        private ConsoleKeyInfo InterceptReadKey()
+        {
+            return Console.ReadKey(true);
+        }
+
+        // ReSharper disable once InconsistentNaming
+        private const int _enter = 13;
+        // ReSharper disable once InconsistentNaming
+        private const int _backspace = 8;
+        // ReSharper disable once InconsistentNaming
+        private const int _ctrlBackspace = 127;
         private readonly int[] _filter = {0, 27, 9, 10};
 
         private SecureString ReadPassword(char mask)
@@ -44,7 +47,7 @@ namespace ShowCommitsForBuild.UserInterface
             var securePass = new SecureString();
             char chr;
 
-            while ((chr = Console.ReadKey(true).KeyChar) != _enter)
+            while ((chr = InterceptReadKey().KeyChar) != _enter)
             {
                 if (IsBackspace(chr))
                 {
